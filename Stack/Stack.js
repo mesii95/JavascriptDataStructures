@@ -19,6 +19,7 @@ class Stack {
         
         // push returns the new length
         this.size = this.data.push(dataElement)
+        this.size++;
         return dataElement;
     }
 
@@ -32,6 +33,7 @@ class Stack {
         
         for(var e of allElements){
             this.data.push(e)
+            this.size++;
         }
         return allElements;
     }
@@ -42,6 +44,7 @@ class Stack {
      */
     pop(){
         if(this.length == 0){ return null; }
+        this.size--;
         return this.data.pop();
     }
 
@@ -60,5 +63,12 @@ class Stack {
      */
     emtpy(){
         return this.data.length === 0;
+    }
+
+    /**
+     * @returns The size of the Stack
+     */
+    size(){
+        return this.size;
     }
 }
