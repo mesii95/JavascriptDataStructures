@@ -68,7 +68,7 @@ class Stack {
     /**
      * @returns The size of the Stack
      */
-    size(){
+    getSize(){
         return this.size;
     }
 }
