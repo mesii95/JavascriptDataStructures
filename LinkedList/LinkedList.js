@@ -4,63 +4,36 @@ class LinkedList {
         this.head = null;
         this.tail = null;
         this.size = 0;
-        this._insertLastIndex = function(data){
-                let n = this.get(this.size-1);
-                let newNode = new Node(n, n.previous, data);
-                n.previous.setNext(newNode);
-                n.setPrev() = newNode;
-                this.size++;
-            };
-        this._insertFirstIndex = function(data){
-                let n = this.get(0);
-                let newNode = new Node(n, null, data);
-                n.setPrev(newNode);
-                this.head = newNode;
-                this.size++;
-            };
-        this._insert = function(data, index){
-                let n1 = this.get(index);
-                let n2 = n1.previous;
-                let newNode = new Node(n1, n2, data);
-                n1.setPrev(newNode);
-                n2.setNext(newNode);
-            };
-        this._addToEmpty = function(data){
-                this.head = new Node(null, null, data);
-                this.tail = this.head;
-                this.size++;
-            };
-        this._addAfterTail = function(data){
-                let n = new Node(null, this.tail, data);
-                this.tail.setNext(n);
-                this.tail = this.tail.next;
-                this.size++;
-            };
         }
 
     add(data, index){
         if(index == null){
             if(this.size === 0){
-                this._addToEmpty(data);
+                _addToEmpty(this, data);
             }else{
-                this._addAfterTail(data);
+                _addAfterTail(this, data);
             }
         }else {
-            if(index >= this.size) { return null; }
-            if(this.isEmpty === true) { this._addToEmpty(data) };
-            if(this.size === 1 && index === 0) { this._insertFirstIndex(data); }
+            if(index >= this.size) { return false; }
+            if(this.isEmpty === true) { _addToEmpty(this, data) };
+            if(this.size === 1 && index === 0) { _insertFirstIndex(this, data); }
 
             if(index == this.size-1){
-                this._insertLastIndex(data);
+                _insertLastIndex(this, data);
             }
             else if(index == 0){
-                this._insertFirstIndex(data);
+                _insertFirstIndex(this, data);
             }
             else {
-                this._insert(data, index);
+                _insert(this, data, index);
             }
         }
-        return(data);
+        this.size++;
+        return true;
+    }
+    
+    addAll(){
+        
     }
 
     remove(){
@@ -107,7 +80,40 @@ class LinkedList {
         return n;
     }
     
-    
+
+}
+
+function _insertLastIndex(self, data){
+    let n = self.get(self.size-1);
+    let newNode = new Node(n, n.previous, data);
+    n.previous.setNext(newNode);
+    n.setPrev() = newNode;
+}
+
+function _insertFirstIndex(self, data){
+    let n = self.get(0);
+    let newNode = new Node(n, null, data);
+    n.setPrev(newNode);
+    self.head = newNode;
+}
+
+function _insert(self, data, index){
+    let n1 = self.get(index);
+    let n2 = n1.previous;
+    let newNode = new Node(n1, n2, data);
+    n1.setPrev(newNode);
+    n2.setNext(newNode);
+}
+
+function _addToEmpty(self, data){
+    self.head = new Node(null, null, data);
+    self.tail = self.head;
+}
+
+function _addAfterTail(self, data){
+    let n = new Node(null, self.tail, data);
+    self.tail.setNext(n);
+    self.tail = self.tail.next;
 }
 
 class Node {
